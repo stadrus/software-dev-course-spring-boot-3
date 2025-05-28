@@ -9,6 +9,21 @@ The first step in upgrading the application is to set up the database.  Open you
 called `springboot2`.  You do not need to create any tables, or set anything up in the database as Spring Boot JPA will
 do that for you.
 
+### Updating the `application.properties` file
+
+Next, we need to update the `application.properties` file to configure the database connection.  Open the
+`src/main/resources/application.properties` file and modify the following line to reflect your password for the MySQL
+server:
+
+```properties
+spring.datasource.password=root
+```
+
+You should also review the other properties in the `application.properties` file to ensure they are set correctly for your
+environment.  The `spring.datasource.url` property should point to the `springboot2` schema you created earlier, and
+the `spring.jpa.hibernate.ddl-auto` property should be set to `update` to allow JPA to create and update the database
+schema as needed.
+
 ## Reviewing the Existing Application
 
 Take a few moments to review the existing application.  Under the main package, you will find the application class
@@ -31,23 +46,6 @@ identify each item in the database.  You should add this as a `private int id` m
 getters and setters for the `id` member.  You should also update the constructors for each of the models to include the
 new `id` member.
 
-### Adding an empty constructor to each model
-
-You should also add an empty constructor to each of the models that takes no arguments and doesn't contain any code  
-This is required by JPA.  An empty constructor is a constructor that takes no arguments:
-
-```java
-public class Book {
-    // ...
-    public Book() {
-    }
-    
-    public Book(String name, String author, int year) {
-        // ...
-    }
-}
-```
-
 ### Adding JPA Annotations to the models
 
 Next, you should add JPA annotations to each of the models.
@@ -57,6 +55,8 @@ Next, you should add JPA annotations to each of the models.
 ```java
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 ```
 
 1. Add the `@Entity` annotation to each of the models.  This tells JPA that the model is an entity that should be
@@ -69,10 +69,10 @@ import jakarta.persistence.GeneratedValue;
 ```java
 @Entity
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    // ...
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
+   // ...
 }
 ```
 
@@ -85,9 +85,22 @@ Next, we need to add JPA repositories for each of the models.  JPA repositories 
 `JpaRepository` interface, and provide methods for accessing the database.  Spring Boot will automatically create
 implementations of these interfaces for us.
 
+Add a new package under the main package called `Repositories`.  This is where we will be adding the JPA
+repositories for the application.
+
 Right-click on the `Repositories` package and create a new Java Interface called `BookRepository`.  This interface
 should extend the `JpaRepository` interface, and should be parameterized with the `Book` model class and the type of
 the `id` member of the `Book` model class (which is `Integer`.)
+
+```java
+package com.example.springBoot2.repositories;
+
+import com.example.springBoot2.models.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Integer> {
+}
+```
 
 Once you have created the `BookRepository` interface, you should add a similar interface for the `Album` and `Movie`
 
@@ -97,20 +110,45 @@ The next step is to update the controllers to use the JPA repositories to access
 
 ### Setting Up To Use The JPA Repositories
 
-1. Change the existing methods to return `null` for now.  We will be replacing the hard-coded list of items with
-   calls to the JPA repositories.
-2. Remove the hard-coded list of items from the controllers.
-3. Add private final fields for the JPA repository that corresponds to the controllers.
-4. Add a constructor to the controllers that takes the JPA repository as an argument and assigns it to the private
+For ALL of the controllers, we will be making the following changes:
+
+1. Remove all code from the inside of the controller class.
+2. Add private final fields for the JPA repository that corresponds to the controllers.
+3. Add a constructor to the controllers that takes the JPA repository as an argument and assigns it to the private
    final field.
+4. Add a `@RequestMapping` annotation to the class to specify the base URL for the controller.
+   (i.e., `/books`, `/albums`, `/movies`)
+
+Example for the `BookController`:
+
+```java
+package com.example.springBoot2.controllers;
+
+import com.example.springBoot2.models.Book;
+import com.example.springBoot2.repositories.BookRepository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+    private final BookRepository bookRepository;
+
+    public BookController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+}
+
+```
 
 ### Implementing The Methods
 
 1. Implement the `getAllItems` method in each of the controllers.  This method should call the `findAll` method on the
    JPA repository and return the result, and should be annotated with `@GetMapping`
 2. Implement the `getItem` method in each of the controllers.  This method should call the `findById` method on the
-   JPA repository and return the result, and should be annotated with `@GetMapping('/{id}')` and have a mapped 
-    `@PathVariable` parameter for the `id` of type `int`.
+   JPA repository and return the result, and should be annotated with `@GetMapping('/{id}')` and have a mapped
+   `@PathVariable` parameter for the `id` of type `int`.
 3. Implement the `addItem` method in each of the controllers.  This method should call the `save` method on the
    JPA repository and return the result, and should be annotated with `@PostMapping` with a `@RequestBody` parameter
 4. Implement the `updateItem` method in each of the controllers.  This method should call the `save` method on the
@@ -128,3 +166,9 @@ by sending HTTP requests to the appropriate endpoints.
 
 A postman collection export file is included in the project directory.  You can import this file into Postman to get
 a set of pre-configured requests for testing this application.
+
+After importing the Postman collection, run the "Create" requests for each of the item types (books, albums, and movies.)
+Then run the "Get All" requests to verify that the items were created successfully.
+
+You can also open MySQL Workbench and browse the tables in the `springboot2` schema to verify that the items were
+created successfully in the database.
