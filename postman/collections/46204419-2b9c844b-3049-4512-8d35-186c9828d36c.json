@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "46204419-2b9c844b-3049-4512-8d35-186c9828d36c",
+		"name": "MyCollections API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Albums",
+			"item": [
+				{
+					"name": "Get all albums",
+					"id": "46204419-202711d2-a49c-427f-9def-2261374b81b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create album",
+					"id": "46204419-3a7e8ea9-ee26-411a-99b2-cff006dcdaf5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"In Rainbows\",\n  \"artist\": \"Radiohead\",\n  \"year\": 2007,\n  \"tracks\": 10\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/albums",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by ID",
+					"id": "46204419-1198500f-4e18-4c9c-ab32-acdabca491d7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update album",
+					"id": "46204419-8aa7d090-4232-4f93-afbd-f187ee7fb5de",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rumours\",\n  \"artist\": \"Fleetwood Mac\",\n  \"year\": 1977,\n  \"tracks\": 11\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/albums/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete album",
+					"id": "46204419-82896dec-152d-447f-8f72-abe1e54aaf6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "46204419-5973ce88-bb69-4776-b215-0e3c7f209d0e"
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get all books",
+					"id": "46204419-927c7da3-1991-4c9b-b820-baf92e145c0c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create book",
+					"id": "46204419-92f6e40f-38a2-4468-b6a7-603ec00db272",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"1984\",\n  \"author\": \"George Orwell\",\n  \"year\": 1949\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get book by ID",
+					"id": "46204419-75d9b860-ca6a-4a39-bd1d-f6399c35dfc6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update book",
+					"id": "46204419-340821bb-6cb4-4bdc-aa5b-8e219823f6a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Brave New World\",\n  \"author\": \"Aldous Huxley\",\n  \"year\": 1932\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book",
+					"id": "46204419-897fd3c1-7104-4dda-8842-2a3d75aeb8b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "46204419-4fb6d449-7d8f-41ea-8cc0-bbe351ed5765"
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Get all movies",
+					"id": "46204419-979d29d1-a93a-417f-acb3-8ab55473f3cc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create movie",
+					"id": "46204419-e725731d-b82e-4ccb-8d43-0162e058abab",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"The Matrix\",\n  \"director\": \"The Wachowskis\",\n  \"year\": 1999\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/movies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get movie by ID",
+					"id": "46204419-f80b38e1-7086-4ece-8596-ea06614ea7c1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update movie",
+					"id": "46204419-cd0e7374-75b9-4f97-8b80-1d062fe1dba5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Interstellar\",\n  \"director\": \"Christopher Nolan\",\n  \"year\": 2014\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/movies/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"id": "46204419-71ba4ffe-29f2-4d99-8b7e-0119343528b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/movies/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movies",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "46204419-3c2ff075-5796-47d2-b559-4a4608a40bd5"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
