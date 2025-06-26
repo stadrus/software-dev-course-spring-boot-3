@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MovieController {
     private final MovieRepository movieRepository;
 
-    public MovieController(MovieRepository movieRepository){
+    private MovieController(MovieRepository movieRepository){
         this.movieRepository = movieRepository;
     }
 
