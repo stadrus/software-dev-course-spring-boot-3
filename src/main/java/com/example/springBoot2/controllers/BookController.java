@@ -33,13 +33,13 @@ public class BookController {
         return bookRepository.save(book);
     }
     //Implement the updateItem method in each of the controllers. This method should call the save method on the JPA repository and return the result, and should be annotated with @PutMapping('/{id}') with a @PathVariable parameter for the id of type int and a @RequestBody parameter.//
-    @PutMapping ("/{id}")
+    @PutMapping ("/books/{id}")
     public Book updateItem (@PathVariable int id, @RequestBody Book book){
         book.setId(id);
         return bookRepository.save(book);
     }
     //Implement the deleteItem method in each of the controllers. This method should call the deleteById method on the JPA repository and should be annotated with @DeleteMapping('/{id}') with a @PathVariable parameter for the id of type int.
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/books/{id}")
     public void deleteItem(@PathVariable int id){
         bookRepository.deleteById(id);
     }
